@@ -1,5 +1,6 @@
 import "./App.css";
-import { Button } from "react-bootstrap";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
@@ -17,6 +18,7 @@ function App() {
           <Route path="*" element={<h1> 404 Page not found</h1>} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </div>
   );
 }

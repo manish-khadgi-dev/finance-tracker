@@ -1,32 +1,29 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Button, Container, Form, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { CustomField } from "../components/customFiled/CustomField";
 import { Layout } from "../components/mainLayout/Layout";
 
 const Login = () => {
-  const handleOnChange = (e) => {
-    console.log(e);
-  };
+  const emailRef = useRef("");
+  const pinRef = useRef("");
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    const loginObj = {
+      email: emailRef.current.value,
+      pin: pinRef.current.value,
+    };
   };
 
-  const formInput = [
-    // {
-    //   name: "Name",
-    //   label: "Name",
-    //   type: "text",
-    //   required: true,
-    //   placeholder: "",
-    // },
-
+  const fields = [
     {
       name: "email",
       label: "Email",
       type: "text",
       required: true,
       placeholder: "",
+      forwardedRef: emailRef,
     },
     {
       name: "password",
@@ -34,6 +31,7 @@ const Login = () => {
       type: "password",
       required: true,
       placeholder: "***************",
+      forwardedRef: pinRef,
     },
   ];
   return (
@@ -52,11 +50,11 @@ const Login = () => {
             <Col className="p-5">
               <div className="form">
                 <h2>
-                  <i class="fa-solid fa-registered"></i> Login
+                  <i className="fa-solid fa-registered"></i> Login
                 </h2>
                 <Form onSubmit={handleOnSubmit}>
-                  {formInput.map((item, i) => (
-                    <CustomField key={i} {...item} onChange={handleOnChange} />
+                  {fields.map((item, i) => (
+                    <CustomField key={i} {...item} />
                   ))}
                   <Button className="" variant="primary" type="submit">
                     Submit
@@ -65,6 +63,9 @@ const Login = () => {
               </div>
             </Col>
           </Row>
+          <div className="text-end">
+            New User ..! <Link to="/register"> Register Now</Link>
+          </div>
         </Container>
       </div>
     </Layout>
